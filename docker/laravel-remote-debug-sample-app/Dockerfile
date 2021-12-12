@@ -4,6 +4,19 @@ RUN apt-get update
 
 # phpのmysql拡張をインストールする
 RUN docker-php-ext-install pdo_mysql
+# xdebugをインストールする
+# RUN pecl install xdebug
+# RUN ls -l /usr/local/etc/php/
+
+RUN apt-get install -y zlib1g-dev mariadb-client libzip-dev libpq-dev
+# RUN docker-php-ext-install zip
+
+RUN mkdir -p /usr/src/php/ext/ \
+    && curl -L http://pecl.php.net/get/xdebug-2.3.3.tgz >> /usr/src/php/ext/xdebug.tgz \
+    && tar -xf /usr/src/php/ext/xdebug.tgz -C /usr/src/php/ext/
+
+RUN ls -l /usr/src/php/ext/
+RUN docker-php-ext-install xdebug-2.3.3
 
 # Laravel実行に必要なパッケージをインストール
 RUN apt-get install -y git zip unzip
