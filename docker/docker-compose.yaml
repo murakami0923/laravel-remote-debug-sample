@@ -1,0 +1,64 @@
+version: '3'
+
+networks:
+    laravel-docker-remote-debug-sample-network:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 192.168.100.0/24
+
+services:
+    db:
+        image: mariadb:10.5
+        container_name: laravel-remote-debug-sample-mariadb
+        hostname: laravel-remote-debug-sample-mariadb
+        environment:
+            MYSQL_ROOT_PASSWORD: Sz7k8Z!b
+            MYSQL_DATABASE: sample_app
+            MYSQL_USER: app_user
+            MYSQL_PASSWORD: AppUser123!
+            TZ: 'Asia/Tokyo'
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        volumes:
+            - ../volumes/mysql/mysql-data:/var/lib/mysql
+            - ../volumes/mysql/db-script:/root/db-script
+        networks:
+            laravel-docker-remote-debug-sample-network:
+                ipv4_address: 192.168.100.101
+        ports:
+            - "3306:3306"
+
+    app:
+        build: laravel-remote-debug-sample-app
+        image: laravel-remote-debug-sample-app:202112
+        container_name: laravel-remote-debug-sample-app
+        hostname: laravel-remote-debug-sample-app
+        volumes:
+            - ../laravel-app:/var/www/html
+        environment:
+            - USER_NAME
+            - USER_ID
+            - GROUP_NAME
+            - GROUP_ID
+        networks:
+            laravel-docker-remote-debug-sample-network:
+                ipv4_address: 192.168.100.102
+        depends_on:
+            - db
+
+    nginx:
+        build: laravel-remote-debug-sample-nginx
+        image: laravel-remote-debug-sample-nginx:202112
+        container_name: laravel-remote-debug-sample-nginx
+        hostname: laravel-remote-debug-sample-nginx
+        volumes:
+            - ../laravel-app:/var/www/html
+        networks:
+            laravel-docker-remote-debug-sample-network:
+                ipv4_address: 192.168.100.103
+        ports:
+            - "80:80"
+        depends_on:
+            - db
+            - app
