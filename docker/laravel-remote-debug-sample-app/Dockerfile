@@ -8,6 +8,18 @@ RUN docker-php-ext-install pdo_mysql
 # Laravel実行に必要なパッケージをインストール
 RUN apt-get install -y git zip unzip
 
+# xdebugをインストールする
+# 参考
+# https://github.com/mlocati/docker-php-extension-installer/issues/189
+# https://github.com/mlocati/docker-php-extension-installer#supported-php-extensions
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions gd xdebug
+
+RUN mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /tmp/docker-php-ext-xdebug.ini.org
+COPY docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+# RUN docker-php-ext-enable xdebug
+
 # composerをインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # バージョンを指定する場合はこちら。（開発時点最新：2.2）

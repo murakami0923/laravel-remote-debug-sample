@@ -1,0 +1,14 @@
+{
+    "name": "php_xdebug_app",           // 任意の名前
+    "dockerComposeFile": [              // docker-compose.ymlのパスを記載
+        "../docker/docker-compose.yaml",
+    ],
+    "service": "app",                   // docker-compose.yml に記載しているサービス名で起動したいコンテナ
+    "workspaceFolder": "/var/www/html", // 作業するパス
+    "forwardPorts": [                   // xdebug.iniに書いたport番号と同じにする
+        9003
+    ],
+    "extensions": [                     // コンテナ内で使用したい拡張機能を設定する
+        "felixfbecker.php-debug",
+    ]
+}

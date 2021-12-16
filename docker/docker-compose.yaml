@@ -31,7 +31,6 @@ services:
 
     app:
         build: laravel-remote-debug-sample-app
-        image: laravel-remote-debug-sample-app:202112
         container_name: laravel-remote-debug-sample-app
         hostname: laravel-remote-debug-sample-app
         volumes:
@@ -44,12 +43,13 @@ services:
         networks:
             laravel-docker-remote-debug-sample-network:
                 ipv4_address: 192.168.100.102
+        ports:
+            - "9003:9003"
         depends_on:
             - db
 
     nginx:
         build: laravel-remote-debug-sample-nginx
-        image: laravel-remote-debug-sample-nginx:202112
         container_name: laravel-remote-debug-sample-nginx
         hostname: laravel-remote-debug-sample-nginx
         volumes:
