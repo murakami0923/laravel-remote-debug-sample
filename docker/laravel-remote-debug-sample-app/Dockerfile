@@ -15,7 +15,10 @@ RUN apt-get install -y git zip unzip
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions gd xdebug
 
-COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+RUN mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /tmp/docker-php-ext-xdebug.ini.org
+COPY docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+RUN docker-php-ext-enable xdebug
 
 # composerをインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
