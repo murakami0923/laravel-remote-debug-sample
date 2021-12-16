@@ -18,7 +18,7 @@ RUN install-php-extensions gd xdebug
 RUN mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /tmp/docker-php-ext-xdebug.ini.org
 COPY docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-RUN docker-php-ext-enable xdebug
+# RUN docker-php-ext-enable xdebug
 
 # composerをインストール
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

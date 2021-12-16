@@ -1,5 +1,5 @@
 {
-    "name": "php_xdebug_app",           // お好きな名前
+    "name": "php_xdebug_app",           // 任意の名前
     "dockerComposeFile": [              // docker-compose.ymlのパスを記載
         "../docker/docker-compose.yaml",
     ],
@@ -8,11 +8,7 @@
     "forwardPorts": [                   // xdebug.iniに書いたport番号と同じにする
         9003
     ],
-    "extensions": [                     // コンテナ内で使用したい拡張機能、お好みに合わせて設定してください。
+    "extensions": [                     // コンテナ内で使用したい拡張機能を設定する
         "felixfbecker.php-debug",
-        "coenraads.bracket-pair-colorizer-2",
-        "oderwat.indent-rainbow",
-        "streetsidesoftware.code-spell-checker",
-        "mosapride.zenkaku"
     ]
 }
