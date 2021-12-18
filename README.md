@@ -21,10 +21,10 @@
   - [PHPの処理の流れ](#phpの処理の流れ)
   - [PHP-FPMコンテナ上でのデバッグ](#php-fpmコンテナ上でのデバッグ)
     - [Docker Composeのボリュームについて](#docker-composeのボリュームについて)
-  - [【解説】Docker定義](#解説docker定義)
-    - [NGINXコンテナ定義](#nginxコンテナ定義)
+- [【解説】Docker定義](#解説docker定義)
+  - [NGINXコンテナ定義](#nginxコンテナ定義)
   - [PHP-FPMコンテナ定義](#php-fpmコンテナ定義)
-  - [PHP-FPM実行ユーザーの作成](#php-fpm実行ユーザーの作成)
+- [【解説】PHP-FPM実行ユーザーの作成](#解説php-fpm実行ユーザーの作成)
 
 <!-- /TOC -->
 
@@ -261,8 +261,8 @@ NGINX、PHP-FPMの書くコンテナにおいて、`/var/www/html`がRootディ�
 PHP-FPMのアプリケーション実行ユーザは、デフォルトでは`www-data`（uid : `33`）となっていますが、WSL2ユーザーのユーザーとグループをPHP-FPMコンテナ内に作成し、そのユーザーでアプリケーションを実行するようにしています。
 
 
-## 【解説】Docker定義
-### NGINXコンテナ定義
+# 【解説】Docker定義
+## NGINXコンテナ定義
 
 定義：`docker/laravel-remote-debug-sample-nginx`
 
@@ -349,7 +349,7 @@ COPY docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.i
 
 ※設定ファイルの中で指定しているポート番号で、Remote Containersやデバッグの際に接続しています。
 
-## PHP-FPM実行ユーザーの作成
+# 【解説】PHP-FPM実行ユーザーの作成
 
 実行する環境によって、ユーザー名・グループ名が異なるため、コンテナ実行時のシェルスクリプトで、ユーザーの作成を定義しています。
 
