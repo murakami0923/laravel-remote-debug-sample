@@ -37,7 +37,8 @@ var_dump(○○○○○);
 
 なお、今回は、Windows 10にWSL2（Windows Subsystem for Linux 2）でUbuntu 20.04をインストールし、その上にDockerおよびDocker Composeをインストールした環境を使用しています。
 
-おそらく、Macでも使えると思いますが、Docker Desktop for Windowsについては、動作するかは不明です。申し訳ありませんがご了承ください。
+Macや、Docker Desktop for Windows等の環境については、動作するかは不明です。申し訳ありませんがご了承ください。
+※Docker Compose実行シェルスクリプトのユーザー・グループの情報を変更することで、動作する可能性がありますので、よろしければお試しください。
 
 # 前提
 
