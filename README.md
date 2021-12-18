@@ -2,7 +2,31 @@
 
 <!-- TOC -->
 
-[TOC]
+- [Xdebugを入れたDocker上のPHP LaravelのWebアプリをVSCodeでステップ実行させるサンプル (WSL2)](#xdebugを入れたdocker上のphp-laravelのwebアプリをvscodeでステップ実行させるサンプル-wsl2)
+- [背景](#背景)
+- [はじめに](#はじめに)
+- [前提](#前提)
+- [使い方](#使い方)
+  - [前提の環境を揃える](#前提の環境を揃える)
+  - [VSCodeに拡張をインストール](#vscodeに拡張をインストール)
+  - [ソースをclone](#ソースをclone)
+  - [Docker定義をビルド](#docker定義をビルド)
+  - [Docker Composeで起動](#docker-composeで起動)
+  - [Webブラウザでページ表示確認](#webブラウザでページ表示確認)
+  - [Remote - ContainersでPHP-FPMコンテナのVSCode Serverを開く](#remote---containersでphp-fpmコンテナのvscode-serverを開く)
+  - [デバッグを開始し、ステップ実行](#デバッグを開始しステップ実行)
+  - [デバッグ終了](#デバッグ終了)
+- [【解説】全体の構成の概要](#解説全体の構成の概要)
+  - [構成図](#構成図)
+  - [PHPの処理の流れ](#phpの処理の流れ)
+  - [PHP-FPMコンテナ上でのデバッグ](#php-fpmコンテナ上でのデバッグ)
+    - [Docker Composeのボリュームについて](#docker-composeのボリュームについて)
+  - [【解説】Docker定義](#解説docker定義)
+    - [NGINXコンテナ定義](#nginxコンテナ定義)
+  - [PHP-FPMコンテナ定義](#php-fpmコンテナ定義)
+  - [PHP-FPM実行ユーザーの作成](#php-fpm実行ユーザーの作成)
+
+<!-- /TOC -->
 
 # 背景
 
